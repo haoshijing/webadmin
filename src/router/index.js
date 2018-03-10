@@ -72,6 +72,14 @@ export const asyncRouterMap = [
     children: [{ path: 'index', component: _import('extend/player/index'), name: '玩家列表' }]
   },
   {
+    path: '/extend/ordertotal',
+    component: Layout,
+    icon: 'table',
+    meta: { role: ['admin'] },
+    noDropdown: true,
+    children: [{ path: 'index', component: _import('extend/ordertotal/index'), name: '充值汇总' }]
+  },
+  {
     path: '/extend/log',
     component: Layout,
     icon: 'table',

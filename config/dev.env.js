@@ -1,6 +1,6 @@
 module.exports = {
     NODE_ENV: '"development"',
     ENV_CONFIG: '"dev"',
-    BASE_API: '"http://xianyugou.youthgamer.com:8080/xygadmin"',
+    BASE_API: '"http://127.0.0.1:9000/admin"',
     APP_ORIGIN: '"https://wallstreetcn.com"'
 }
