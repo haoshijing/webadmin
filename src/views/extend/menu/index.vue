@@ -37,24 +37,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column  label="代理类别">
-        <template scope="scope">
-          <span>{{scope.row.type | typeFilter }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column  align="center" label="备注名">
         <template scope="scope">
           <span>{{scope.row.weChartNo}}</span>
         </template>
       </el-table-column>
-      <el-table-column  align="center" label="卡片数">
+
+      <el-table-column  align="center" label="卡片">
         <template scope="scope">
           <span>{{scope.row.cardCount}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column  align="center" label="金豆">
+      <el-table-column  label="金币">
         <template scope="scope">
           <span>{{scope.row.goldCount}}</span>
         </template>
@@ -71,6 +66,7 @@
           <span>{{scope.row.addCount}}</span>
         </template>
       </el-table-column>
+
 
       <el-table-column align="center" label="总下属数" width="95">
         <template scope="scope">
@@ -96,15 +92,27 @@
         </template>
       </el-table-column>
 
+      <el-table-column align="center" label="本周是否已派发奖励">
+        <template scope="scope">
+          {{scope.row.isAward}}
+        </template>
+      </el-table-column>
+
       <el-table-column align="left" label="操作" width="250" >
         <template scope="scope">
           <el-button  size="small" type="success" @click="handleUpdate(scope.row)">编辑
           </el-button>
           <el-button  size="small" type="success" @click="handlerResetPwd(scope.row.agentId)">重置密码
           </el-button>
+
         </template>
       </el-table-column>
-
+      <el-table-column align="left" label="提现申请" width="250" >
+        <template scope="scope">
+          <el-button  size="small" v-if="scope.row.cashPo" type="success" @click="hanlderCashApply(scope.row.cashPo)">新申请
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <div v-show="!listLoading" class="pagination-container">
@@ -112,7 +120,7 @@
                      :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+      <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px" style='width: 400px; margin-left:50px;'>
         <el-form-item label="用户名">
           <el-input v-model="temp.userName" v-if = "!temp.id"></el-input>
@@ -127,12 +135,6 @@
           <el-input v-model="temp.wechartNo" ></el-input>
         </el-form-item>
 
-        <el-form-item label="代理级别">
-          <el-select  class="filter-item" v-model="temp.level" placeholder="请选择">
-            <el-option v-for="item in  proxyList" :key="item.key" :label="item.label" :value="item.key">
-            </el-option>
-          </el-select>
-        </el-form-item>
 
         <el-form-item label="guid">
           <el-select class="filter-item" filterable  v-if = "!temp.id" v-model="temp.guid" placeholder="请选择">
@@ -142,12 +144,6 @@
           <span v-if = "temp.id">{{temp.guid}}</span>
         </el-form-item>
 
-        <el-form-item label="上级代理" v-if="temp.level == 3">
-          <el-select   class="filter-item" filterable  v-model="temp.parentAgentId" placeholder="请选择">
-            <el-option v-for="item in  chooseAreaAgentList" :key="item.agentId" :label="item.guid" :value="item.agentId">
-            </el-option>
-          </el-select>
-        </el-form-item>
 
         <el-form-item label="备注">
           <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="temp.memo">
@@ -186,6 +182,14 @@
         <el-button type="primary" @click="dialogPorxyVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog title="代理提现申请" :visible.sync="cashApplyVisible" size="small">
+
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="handlerApply(1,2)">同意</el-button>
+        <el-button type="primary" @click="handlerApply(1,3)">拒绝</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -197,6 +201,7 @@
   import { obtainUnderPlayer } from '@/api/agent'
   import { obtainUnderAgent } from '@/api/agent'
   import { obtainChooseAgentList } from '@/api/agent'
+  import { dealCash } from '@/api/agent'
   import { resetPwd } from '@/api/agent'
 
   import waves from '@/directive/waves/index.js' // 水波纹指令
@@ -224,6 +229,7 @@
       return {
         dialogMemberVisible: false,
         dialogPorxyVisible: false,
+        cashApplyVisible: false,
         list: [],
         chooseAgentList: [],
         chooseAreaAgentList: [],
@@ -285,6 +291,9 @@
           this.listLoading = false
         })
       },
+      hanlderCashApply(applyData) {
+        this.cashApplyVisible = false
+      },
       handleClipboard(text, event) {
         clipboard(text, event)
       },
@@ -306,6 +315,11 @@
       },
       handleSizeChange(val) {
         this.listQuery.limit = val
+        this.getList()
+      },
+      handlerApply(aId, status) {
+        this.cashApplyVisible = false
+        dealCash(aId, status)
         this.getList()
       },
       handlerResetPwd(agentId) {

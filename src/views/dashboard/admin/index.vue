@@ -10,16 +10,6 @@
 						</pan-thumb>
 					</div>
 					<span class="display_name">{{name}}</span>
-					<div class="info-item">
-						<count-to class="info-item-num" :startVal='0' :endVal='statisticsData.dayPickTotal' :duration='3400'></count-to>
-						<span class="info-item-text">今日总充值额</span>
-						<icon-svg icon-class="trendChart1" class="dashboard-editor-icon"></icon-svg>
-					</div>
-					<div class="info-item">
-						<count-to class="info-item-num" :startVal='0' :endVal='statisticsData.daySuccessTotal' :duration='3600'></count-to>
-						<span class="info-item-text">今日充值成功金额</span>
-						<icon-svg icon-class="trendChart2" class="dashboard-editor-icon"></icon-svg>
-					</div>
 				</el-card>
 			</el-col>
     <!--
@@ -53,7 +43,6 @@ import todoList from '@/components/TodoList'
 import pieChart from './pieChart'
 import barChart from './barChart'
 import lineChart from './lineChart'
-import { currentDayTotal } from '@/api/index'
 
 export default {
   name: 'dashboard-admin',
@@ -71,9 +60,7 @@ export default {
   },
   methods: {
     getList() {
-      currentDayTotal().then(response => {
-        this.statisticsData = response.data.data
-      })
+
     }
   },
   computed: {
