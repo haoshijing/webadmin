@@ -46,81 +46,21 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
-    path: '/extend/agent',
+    path: '/extend/menu',
     component: Layout,
     icon: 'table',
     meta: { role: ['admin'] },
     noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/agent/index'), name: '代理列表', meta: { role: ['admin'] }}]
+    children: [{ path: 'index', component: _import('extend/menu/index'), name: '菜单管理', meta: { role: ['admin'] }}]
   },
   {
-    path: '/extend/pick',
+    path: '/extend/content',
     component: Layout,
     icon: 'table',
-    redirect: '/extend/pick',
+    redirect: '/extend/content',
     meta: { role: ['admin'] },
     noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/pick/index'), name: '充值列表' }]
-  },
-  {
-    path: '/extend/player',
-    component: Layout,
-    icon: 'table',
-    redirect: '/extend/player',
-    meta: { role: ['admin'] },
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/player/index'), name: '玩家列表' }]
-  },
-  {
-    path: '/extend/ordertotal',
-    component: Layout,
-    icon: 'table',
-    meta: { role: ['admin'] },
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/ordertotal/index'), name: '充值汇总' }]
-  },
-  {
-    path: '/extend/log',
-    component: Layout,
-    icon: 'table',
-    meta: { role: ['admin'] },
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/log/index'), name: '操作日志' }]
-  },
-  {
-    path: '/extend/user/',
-    component: Layout,
-    icon: 'table',
-    hidden: true,
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/user/index'), name: '修改密码' }]
-  },
-  {
-    path: '/extend/biz/underagent',
-    component: Layout,
-    icon: 'table',
-    meta: { role: ['areaagent'] },
-    hidden: false,
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/biz/underagent/index'), name: '下级代理' }]
-  },
-  {
-    path: '/extend/biz/agentpick',
-    component: Layout,
-    icon: 'table',
-    meta: { role: ['agent'] },
-    hidden: false,
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/biz/agentpick/index'), name: '我的充值' }]
-  },
-  {
-    path: '/extend/biz/player',
-    component: Layout,
-    icon: 'table',
-    meta: { role: ['agent'] },
-    hidden: false,
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/biz/player/index'), name: '我的会员' }]
+    children: [{ path: 'index', component: _import('extend/content/index'), name: '网站内容管理' }]
   },
   { path: '*', redirect: '/404', hidden: true }
 ]
