@@ -13,3 +13,8 @@ export function insertMenu(menuVo) {
   const url = '/menu/insertMenu'
   return http.post(url, JSON.stringify(menuVo))
 }
+
+export function updateMenu(menuVo) {
+  const url = '/menu/updateMenu'
+  return http.post(url, JSON.stringify(menuVo))
+}
