@@ -14,6 +14,11 @@ export function insertMenu(menuVo) {
   return http.post(url, JSON.stringify(menuVo))
 }
 
+export function queryParentMenu() {
+  const url = '/menu/queryParentMenu'
+  return http.post(url)
+}
+
 export function updateMenu(menuVo) {
   const url = '/menu/updateMenu'
   return http.post(url, JSON.stringify(menuVo))
