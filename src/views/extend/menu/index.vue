@@ -6,15 +6,12 @@
 
       <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
       </el-select>
-      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter"}>查询</el-button>
+      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="el-icon-edit">创建</el-button>
     </div>
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="加载中" border fit highlight-current-row
               style="width: 100%">
-      <el-table-column  prop="id" label="Id"
-        width="180">
-      </el-table-column>
     </el-table>
 
     <div class="pagination-container">
@@ -25,8 +22,7 @@
       </el-pagination>
     </div>
 
-
-  </div
+  </div>
 </template>
 
 <script>
@@ -216,22 +212,6 @@
         })
         const index = this.list.indexOf(row)
         this.list.splice(index, 1)
-      },
-      handleFetchPv(pv) {
-        fetchPv(pv).then(response => {
-          this.pvData = response.data.pvData
-          this.dialogPvVisible = true
-        })
-      },
-      handleDownload() {
-        this.downloadLoading = true
-        import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
-          const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
-          const data = this.formatJson(filterVal, this.list)
-          excel.export_json_to_excel(tHeader, data, 'table-list')
-          this.downloadLoading = false
-        })
       },
       formatJson(filterVal, jsonData) {
         return jsonData.map(v => filterVal.map(j => {
