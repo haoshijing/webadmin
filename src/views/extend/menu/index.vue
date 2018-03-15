@@ -161,6 +161,7 @@
       },
       createData() {
         insertMenu(this.temp).then(() => {
+          this.handleFilter()
           this.dialogFormVisible = false
           this.$notify({
             title: '成功',
@@ -169,7 +170,6 @@
             duration: 2000
           })
         })
-        this.handleFilter()
       },
       handleUpdate(row) {
       },

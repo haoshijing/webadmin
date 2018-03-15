@@ -8,7 +8,7 @@
       </el-select>
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
-                 icon="el-icon-edit">创建
+                 icon="el-icon-edit">创建网站
       </el-button>
     </div>
 
@@ -57,18 +57,13 @@
           <el-input v-model="temp.url"></el-input>
         </el-form-item>
 
-        <el-form-item label="网站标题">
-          <el-input v-model="temp.name"></el-input>
-        </el-form-item>
-
-
         <el-form-item label="排序号">
           <el-input v-model="temp.sort"></el-input>
         </el-form-item>
 
         <el-form-item label="上级菜单">
-          <el-select   class="filter-item" filterable  v-model="temp.parentId" placeholder="请选择">
-            <el-option v-for="item in  parentMenuList" :key="item.id" :label="item.menuName" :value="item.id">
+          <el-select   class="filter-item" filterable  v-model="temp.menuId" placeholder="请选择">
+            <el-option v-for="item in  parentMenuList" :key="item.menuId" :label="item.menuName" :value="item.menuId">
             </el-option>
           </el-select>
         </el-form-item>
@@ -91,7 +86,8 @@
 </template>
 
 <script>
-  import { queryContentList, queryContentCount, insertContent } from '@/api/content'
+  import { queryContentList, queryContentCount, insertContent, updateContent } from '@/api/content'
+  import { queryMenuListForContent } from '@/api/menu'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -108,13 +104,15 @@
         listQuery: {
           page: 1,
           limit: 50,
-          menuName: undefined
+          name: undefined
         },
         parentMenuList: [],
         temp: {
           id: undefined,
-          menuName: '',
-          parentId: -1
+          name: '',
+          parentId: -1,
+          sort: 0,
+          link: ''
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -164,7 +162,7 @@
       resetTemp() {
         this.temp = {
           id: undefined,
-          menuName: '',
+          menuId: '',
           sort: 0,
           parentId: ''
         }
@@ -173,12 +171,13 @@
         this.resetTemp()
         this.dialogStatus = 'create'
         this.dialogFormVisible = true
-        queryMenuList().then(response => {
+        queryMenuListForContent().then(response => {
           this.parentMenuList = response.data.data
         })
       },
       createData() {
         insertContent(this.temp).then(() => {
+          this.handleFilter()
           this.dialogFormVisible = false
           this.$notify({
             title: '成功',
@@ -187,7 +186,6 @@
             duration: 2000
           })
         })
-        this.handleFilter()
       },
       handleUpdate(row) {
       },
@@ -195,15 +193,7 @@
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             const tempData = Object.assign({}, this.temp)
-            tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-            updateMenu(tempData).then(() => {
-              for (const v of this.list) {
-                if (v.id === this.temp.id) {
-                  const index = this.list.indexOf(v)
-                  this.list.splice(index, 1, this.temp)
-                  break
-                }
-              }
+            updateContent(tempData).then(() => {
               this.dialogFormVisible = false
               this.$notify({
                 title: '成功',

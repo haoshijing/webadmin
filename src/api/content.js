@@ -1,15 +1,20 @@
 import http from '@/utils/fetch'
 
 export function queryContentList(contentRequestVo) {
-  const url = '/conent/selectList'
+  const url = '/content/selectList'
   return http.post(url, JSON.stringify(contentRequestVo))
 }
 export function queryContentCount(contentRequestVo) {
-  const url = '/conent/selectCount'
+  const url = '/content/selectCount'
   return http.post(url, JSON.stringify(contentRequestVo))
 }
 
 export function insertContent(contentVo) {
-  const url = '/conent/insertContent'
+  const url = '/content/insertContent'
   return http.post(url, JSON.stringify(contentVo))
+}
+
+export function updateContent(contentVo) {
+  const url = '/content/insertContent'
+  return http.post(url, contentVo)
 }
