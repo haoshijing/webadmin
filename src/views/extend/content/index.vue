@@ -33,7 +33,7 @@
       </el-table-column>
       <el-table-column min-width="300px" label="网站图片">
         <template scope="scope">
-          <span>{{scope.row.image}}</span>
+          <img :src =  "scope.row.image" ></img>
         </template>
       </el-table-column>
       <el-table-column min-width="300px" label="所属菜单">
@@ -67,6 +67,12 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="网站图片">
+          <el-upload action="http://127.0.0.1:8123/admin/content/upload"  name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -88,7 +94,7 @@
 <script>
   import { queryContentList, queryContentCount, insertContent, updateContent } from '@/api/content'
   import { queryMenuListForContent } from '@/api/menu'
-  import waves from '@/directive/waves' // 水波纹指令
+  import waves from '@/directive/waves'
 
   export default {
     name: 'complexTable',
@@ -164,7 +170,8 @@
           id: undefined,
           menuId: '',
           sort: 0,
-          parentId: ''
+          parentId: '',
+          image: ''
         }
       },
       handleCreate() {
@@ -186,6 +193,11 @@
             duration: 2000
           })
         })
+      },
+      uploadOk(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.image = response.data
+        }
       },
       handleUpdate(row) {
       },
