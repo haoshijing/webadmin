@@ -1,11 +1,9 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" v-model="listQuery.menuName">
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item"
+                v-model="listQuery.menuName">
       </el-input>
-
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
-      </el-select>
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
                  icon="el-icon-edit">创建网站
@@ -15,35 +13,42 @@
     <el-table :data="list" v-loading="listLoading" element-loading-text="加载中" border fit highlight-current-row
               style="width: 100%">
 
-      <el-table-column min-width="300px" label="Id">
+      <el-table-column min-width="50px" label="Id">
         <template scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="300px" label="网站标题">
+      <el-table-column min-width="100px" label="网站标题">
         <template scope="scope">
           <span>{{scope.row.name}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300px" label="网站链接">
+      <el-table-column min-width="200px" label="网站链接">
         <template scope="scope">
           <span>{{scope.row.url}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300px" label="网站图片">
+      <el-table-column min-width="200px" label="网站图片">
         <template scope="scope">
-          <img :src =  "scope.row.image" ></img>
+          <img :src="scope.row.image" height="80" width="80"></img>
         </template>
       </el-table-column>
-      <el-table-column min-width="300px" label="所属菜单">
+
+      <el-table-column min-width="100px" label="所属菜单">
         <template scope="scope">
           <span>{{scope.row.menuName}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300px" label="位置排序">
+      <el-table-column min-width="100px" label="位置排序">
         <template scope="scope">
           <span>{{scope.row.sort}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="left" label="操作">
+        <template scope="scope">
+          <el-button size="small" type="success" @click="handleUpdate(scope.row)">编辑
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -56,19 +61,24 @@
         <el-form-item label="网站链接">
           <el-input v-model="temp.url"></el-input>
         </el-form-item>
+        <el-form-item label="后台链接">
+          <el-input v-model="temp.adminUrl"></el-input>
+        </el-form-item>
 
         <el-form-item label="排序号">
           <el-input v-model="temp.sort"></el-input>
         </el-form-item>
 
         <el-form-item label="上级菜单">
-          <el-select   class="filter-item" filterable  v-model="temp.menuId" placeholder="请选择">
+          <el-select class="filter-item" filterable v-model="temp.menuId" placeholder="请选择">
             <el-option v-for="item in  parentMenuList" :key="item.menuId" :label="item.menuName" :value="item.menuId">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="网站图片">
-          <el-upload action="http://127.0.0.1:8123/admin/content/upload"  name="image" drag :multiple="false" :on-success = "uploadOk">
+          <el-upload ref = "upload" action="http://115.159.29.17:8123/admin/content/upload"
+             name="image" drag :multiple="false"
+                     :on-success="uploadOk">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
@@ -118,7 +128,9 @@
           name: '',
           parentId: -1,
           sort: 0,
-          link: ''
+          webPrice: 0,
+          url: '',
+          adminUrl:''
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -130,8 +142,7 @@
         downloadLoading: false
       }
     },
-    filters: {
-    },
+    filters: {},
     created() {
       this.getList()
     },
@@ -171,7 +182,10 @@
           menuId: '',
           sort: 0,
           parentId: '',
-          image: ''
+          image: '',
+          url: '',
+          webPrice: 0,
+          adminUrl: ''
         }
       },
       handleCreate() {
@@ -200,23 +214,35 @@
         }
       },
       handleUpdate(row) {
+        queryMenuListForContent().then(response => {
+          this.parentMenuList = response.data.data
+        })
+        this.temp = {
+          id: row.id,
+          name: row.name,
+          url: row.url,
+          sort: row.sort,
+          menuId: row.menuId,
+          webPrice: row.webPrice,
+          adminUrl: row.adminUrl
+        }
+        this.dialogStatus = 'update'
+        this.dialogFormVisible = true
       },
       updateData() {
-        this.$refs['dataForm'].validate((valid) => {
-          if (valid) {
-            const tempData = Object.assign({}, this.temp)
-            updateContent(tempData).then(() => {
-              this.dialogFormVisible = false
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            })
-          }
+        const tempData = Object.assign({}, this.temp)
+        updateContent(tempData).then(() => {
+          this.handleFilter()
+          this.dialogFormVisible = false
+          this.$notify({
+            title: '成功',
+            message: '更新成功',
+            type: 'success',
+            duration: 2000
+          })
         })
       }
+
     }
   }
 </script>

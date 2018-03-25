@@ -15,6 +15,11 @@ export function insertContent(contentVo) {
 }
 
 export function updateContent(contentVo) {
-  const url = '/content/insertContent'
+  const url = '/content/updateContent'
   return http.post(url, contentVo)
+}
+
+export function deleteContent(id) {
+  const url = '/menu/deleteContent?id='.concat(id)
+  return http.get(url)
 }

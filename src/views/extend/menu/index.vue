@@ -4,8 +4,6 @@
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" v-model="listQuery.menuName">
       </el-input>
 
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
-      </el-select>
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
                  icon="el-icon-edit">创建
@@ -54,6 +52,12 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-table-column align="left" label="操作">
+          <template scope="scope">
+            <el-button size="small" type="success" @click="handleDelete(scope.row)">删除
+            </el-button>
+          </template>
+        </el-table-column>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -73,7 +77,12 @@
 </template>
 
 <script>
-  import { queryMenuList, queryMenuCount, insertMenu, updateMenu, queryParentMenu } from '@/api/menu'
+  import { queryMenuList,
+    queryMenuCount,
+    insertMenu,
+    updateMenu,
+    queryParentMenu,
+    deleteMenu } from '@/api/menu'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -166,6 +175,17 @@
           this.$notify({
             title: '成功',
             message: '创建成功',
+            type: 'success',
+            duration: 2000
+          })
+        })
+      },
+      handleDelete(id){
+        deleteMenu().then(() => {
+          this.handleFilter()
+          this.$notify({
+            title: '成功',
+            message: '删除',
             type: 'success',
             duration: 2000
           })

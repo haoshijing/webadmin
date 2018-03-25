@@ -28,3 +28,8 @@ export function updateMenu(menuVo) {
   const url = '/menu/updateMenu'
   return http.post(url, JSON.stringify(menuVo))
 }
+
+export function deleteMenu(id) {
+  const url = '/menu/deleteMenu?id='.concat(id)
+  return http.get(url)
+}
