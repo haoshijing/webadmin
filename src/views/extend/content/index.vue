@@ -49,6 +49,9 @@
         <template scope="scope">
           <el-button size="small" type="success" @click="handleUpdate(scope.row)">编辑
           </el-button>
+
+          <el-button size="small" type="success" @click="handleDelete(scope.row.id)">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -102,7 +105,7 @@
 </template>
 
 <script>
-  import { queryContentList, queryContentCount, insertContent, updateContent } from '@/api/content'
+  import { queryContentList, queryContentCount, insertContent, updateContent, deleteContent } from '@/api/content'
   import { queryMenuListForContent } from '@/api/menu'
   import waves from '@/directive/waves'
 
@@ -130,7 +133,7 @@
           sort: 0,
           webPrice: 0,
           url: '',
-          adminUrl:''
+          adminUrl: ''
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -184,7 +187,6 @@
           parentId: '',
           image: '',
           url: '',
-          webPrice: 0,
           adminUrl: ''
         }
       },
@@ -223,11 +225,21 @@
           url: row.url,
           sort: row.sort,
           menuId: row.menuId,
-          webPrice: row.webPrice,
           adminUrl: row.adminUrl
         }
         this.dialogStatus = 'update'
         this.dialogFormVisible = true
+      },
+      handleDelete(id) {
+        deleteContent(id).then(() => {
+          this.handleFilter()
+          this.$notify({
+            title: '成功',
+            message: '删除成功',
+            type: 'success',
+            duration: 2000
+          })
+        })
       },
       updateData() {
         const tempData = Object.assign({}, this.temp)

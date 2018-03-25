@@ -13,13 +13,13 @@
     <el-table :data="list" v-loading="listLoading" element-loading-text="加载中" border fit highlight-current-row
               style="width: 100%">
 
-      <el-table-column min-width="300px" label="Id">
+      <el-table-column min-width="100px" label="Id">
         <template scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="300px" label="菜单名称">
+      <el-table-column min-width="200px" label="菜单名称">
         <template scope="scope">
           <span>{{scope.row.menuName}}</span>
         </template>
@@ -32,6 +32,12 @@
       <el-table-column min-width="300px" label="排序号">
         <template scope="scope">
           <span>{{scope.row.sort}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="left" label="操作">
+        <template scope="scope">
+          <el-button size="small" type="success" @click="handleDelete(scope.row)">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -52,12 +58,6 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-table-column align="left" label="操作">
-          <template scope="scope">
-            <el-button size="small" type="success" @click="handleDelete(scope.row)">删除
-            </el-button>
-          </template>
-        </el-table-column>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -77,12 +77,7 @@
 </template>
 
 <script>
-  import { queryMenuList,
-    queryMenuCount,
-    insertMenu,
-    updateMenu,
-    queryParentMenu,
-    deleteMenu } from '@/api/menu'
+  import { queryMenuList, queryMenuCount, insertMenu, updateMenu, queryParentMenu, updateStatus } from '@/api/menu'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -181,11 +176,11 @@
         })
       },
       handleDelete(id){
-        deleteMenu().then(() => {
+        updateStatus(id).then( () => {
           this.handleFilter()
           this.$notify({
             title: '成功',
-            message: '删除',
+            message: '删除成功',
             type: 'success',
             duration: 2000
           })
@@ -194,28 +189,6 @@
       handleUpdate(row) {
       },
       updateData() {
-        this.$refs['dataForm'].validate((valid) => {
-          if (valid) {
-            const tempData = Object.assign({}, this.temp)
-            tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-            updateMenu(tempData).then(() => {
-              for (const v of this.list) {
-                if (v.id === this.temp.id) {
-                  const index = this.list.indexOf(v)
-                  this.list.splice(index, 1, this.temp)
-                  break
-                }
-              }
-              this.dialogFormVisible = false
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            })
-          }
-        })
       }
     }
   }
