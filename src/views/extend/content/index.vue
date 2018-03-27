@@ -94,70 +94,70 @@
         </el-form-item>
         <el-form-item label="详情图片1">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="detailImage1" drag :multiple="false" :on-success = "uploadDetail1Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片2">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="detailImage2" drag :multiple="false" :on-success = "uploadDetail2Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片3">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="detailImage3" drag :multiple="false" :on-success = "uploadDetail3Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片4">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="detailImage4" drag :multiple="false" :on-success = "uploadDetail4Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片5">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="detailImage5" drag :multiple="false" :on-success = "uploadDetail5Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片1">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="funcImage1" drag :multiple="false" :on-success = "uploadFunc1Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片2">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="funcImage2" drag :multiple="false" :on-success = "uploadFunc2Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片3">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="funcImage3" drag :multiple="false" :on-success = "uploadFunc3Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片4">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="funcImage4" drag :multiple="false" :on-success = "uploadFunc4Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片5">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="funcImage5" drag :multiple="false" :on-success = "uploadFunc5Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
@@ -260,7 +260,16 @@
           menuId: '',
           sort: 0,
           parentId: '',
-          image: '',
+          detailImage1: '',
+          detailImage2: '',
+          detailImage3: '',
+          detailImage4: '',
+          detailImage5: '',
+          funcImage1: '',
+          funcImage2: '',
+          funcImage3: '',
+          funcImage4: '',
+          funcImage5: '',
           url: '',
           adminUrl: ''
         }
@@ -288,6 +297,56 @@
       uploadOk(response, file, fileList) {
         if (response.code === 200) {
           this.temp.image = response.data
+        }
+      },
+      uploadDetail1Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.detailImage1 = response.data
+        }
+      },
+      uploadDetail2Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.detailImage2 = response.data
+        }
+      },
+      uploadDetail3Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.detailImage3 = response.data
+        }
+      },
+      uploadDetail4Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.detailImage4 = response.data
+        }
+      },
+      uploadDetail5Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.detailImage5 = response.data
+        }
+      },
+      uploadFunc1Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.funcImage1 = response.data
+        }
+      },
+      uploadFunc2Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.funcImage2 = response.data
+        }
+      },
+      uploadFunc3Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.funcImage3 = response.data
+        }
+      },
+      uploadFunc4Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.funcImage4 = response.data
+        }
+      },
+      uploadFunc5Ok(response, file, fileList) {
+        if (response.code === 200) {
+          this.temp.funcImage5 = response.data
         }
       },
       handleUpdate(row) {
