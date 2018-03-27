@@ -20,6 +20,6 @@ export function updateContent(contentVo) {
 }
 
 export function deleteContent(id) {
-  const url = '/menu/deleteContent/'.concat(id)
+  const url = '/content/deleteContent/'.concat(id)
   return http.get(url)
 }

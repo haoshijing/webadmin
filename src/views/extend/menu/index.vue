@@ -24,19 +24,19 @@
           <span>{{scope.row.menuName}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300px" label="上级菜单名">
+      <el-table-column min-width="200px" label="上级菜单名">
         <template scope="scope">
           <span>{{scope.row.menuParentName}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300px" label="排序号">
+      <el-table-column min-width="100px" label="排序号">
         <template scope="scope">
           <span>{{scope.row.sort}}</span>
         </template>
       </el-table-column>
       <el-table-column align="left" label="操作">
         <template scope="scope">
-          <el-button size="small" type="success" @click="handleDelete(scope.row)">删除
+          <el-button size="small" type="success" @click="handleDelete(scope.row.id)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import { queryMenuList, queryMenuCount, insertMenu, updateMenu, queryParentMenu, updateStatus } from '@/api/menu'
+  import { queryMenuList, queryMenuCount, insertMenu, queryParentMenu, updateStatus } from '@/api/menu'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -175,8 +175,8 @@
           })
         })
       },
-      handleDelete(id){
-        updateStatus(id).then( () => {
+      handleDelete(id) {
+        updateStatus(id).then(() => {
           this.handleFilter()
           this.$notify({
             title: '成功',

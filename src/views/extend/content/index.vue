@@ -45,7 +45,7 @@
           <span>{{scope.row.sort}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="操作">
+      <el-table-column align="left" label="操作"  width="250">
         <template scope="scope">
           <el-button size="small" type="success" @click="handleUpdate(scope.row)">编辑
           </el-button>
