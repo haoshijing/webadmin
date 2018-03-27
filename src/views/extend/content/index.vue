@@ -79,9 +79,85 @@
           </el-select>
         </el-form-item>
         <el-form-item label="网站图片">
-          <el-upload ref = "upload" action="http://115.159.29.17:8123/admin/content/upload"
-             name="image" drag :multiple="false"
-                     :on-success="uploadOk">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="网站图片">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="详情图片1">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="详情图片2">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="详情图片3">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="详情图片4">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="详情图片5">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="功能图片1">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="功能图片2">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="功能图片3">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="功能图片4">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="功能图片5">
+          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
+                     name="image" drag :multiple="false" :on-success = "uploadOk">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
@@ -131,7 +207,6 @@
           name: '',
           parentId: -1,
           sort: 0,
-          webPrice: 0,
           url: '',
           adminUrl: ''
         },
@@ -254,7 +329,6 @@
           })
         })
       }
-
     }
   }
 </script>
