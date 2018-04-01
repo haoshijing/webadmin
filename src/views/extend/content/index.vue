@@ -55,7 +55,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" close = "onClose">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
         <el-form-item label="网站标题">
@@ -80,84 +80,107 @@
         </el-form-item>
         <el-form-item label="网站图片">
           <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="网站图片">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="image" drag :multiple="false" :on-success = "uploadOk">
+                     name="image"
+                     drag :multiple="false"
+                     :on-success = "uploadOk"
+                     ref="indexImage">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片1">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="detailImage1" drag :multiple="false" :on-success = "uploadDetail1Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadDetailImage1"
+                     name="detailImage1" drag :multiple="false"
+                     :on-success = "uploadDetail1Ok"
+                     list-type="picture" ref="detailImage1">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片2">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="detailImage2" drag :multiple="false" :on-success = "uploadDetail2Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadDetailImage2"
+                     list-type="picture"
+                     name="detailImage2"
+                     drag :multiple="false"
+                     :on-success = "uploadDetail2Ok"
+                     ref="detailImage2">
+
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片3">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="detailImage3" drag :multiple="false" :on-success = "uploadDetail3Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadDetailImage3"  list-type="picture"
+                     name="detailImage3"
+                     ref="detailImage3"
+                     drag :multiple="false" :on-success = "uploadDetail3Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片4">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="detailImage4" drag :multiple="false" :on-success = "uploadDetail4Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadDetailImage4"  list-type="picture"
+                     name="detailImage4"
+                     ref="detailImage4"
+                     drag :multiple="false"
+                     :on-success = "uploadDetail4Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片5">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="detailImage5" drag :multiple="false" :on-success = "uploadDetail5Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadDetailImage5"  list-type="picture"
+                     name="detailImage5"
+                     drag :multiple="false"
+                     :on-success = "uploadDetail5Ok"
+                     ref="detailImage5">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片1">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="funcImage1" drag :multiple="false" :on-success = "uploadFunc1Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadFuncImage1"  list-type="picture"
+                     name="funcImage1"
+                     ref="funcImage1"
+                     drag :multiple="false"
+                     :on-success = "uploadFunc1Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片2">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="funcImage2" drag :multiple="false" :on-success = "uploadFunc2Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadFuncImage2"  list-type="picture"
+                     name="funcImage2"
+                     ref="funcImage2"
+                     drag :multiple="false" :on-success = "uploadFunc2Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片3">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="funcImage3" drag :multiple="false" :on-success = "uploadFunc3Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadFuncImage3"  list-type="picture"
+                     name="funcImage3"
+                     ref="funcImage3"
+                     drag :multiple="false" :on-success = "uploadFunc3Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片4">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="funcImage4" drag :multiple="false" :on-success = "uploadFunc4Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadFuncImage4"  list-type="picture"
+                     name="funcImage4"
+                     ref="funcImage4"
+                     drag :multiple="false"
+                     :on-success = "uploadFunc4Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片5">
-          <el-upload action="http://115.159.29.17:8123/admin/content/upload"
-                     name="funcImage5" drag :multiple="false" :on-success = "uploadFunc5Ok">
+          <el-upload action="http://115.159.29.17:8123/admin/content/uploadFuncImage5"  list-type="picture"
+                     name="funcImage5"
+                     ref="funcImage5"
+                     drag :multiple="false" :on-success = "uploadFunc5Ok">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
@@ -375,11 +398,25 @@
           })
         })
       },
+      onClose() {
+        console.log('关闭对话框')
+      },
       updateData() {
         const tempData = Object.assign({}, this.temp)
         updateContent(tempData).then(() => {
           this.handleFilter()
           this.dialogFormVisible = false
+          this.$refs.detailImage1.clearFiles()
+          this.$refs.detailImage2.clearFiles()
+          this.$refs.detailImage3.clearFiles()
+          this.$refs.detailImage4.clearFiles()
+          this.$refs.detailImage5.clearFiles()
+          this.$refs.funcImage1.clearFiles()
+          this.$refs.funcImage2.clearFiles()
+          this.$refs.funcImage3.clearFiles()
+          this.$refs.funcImage4.clearFiles()
+          this.$refs.funcImage5.clearFiles()
+          this.$refs.indexImage.clearFiles()
           this.$notify({
             title: '成功',
             message: '更新成功',
