@@ -79,31 +79,27 @@
           </el-select>
         </el-form-item>
         <el-form-item label="网站图片">
-          <el-upload action="http://47.75.167.230:8123/admin/content/upload"
+          <el-upload action="http://47.52.135.205:8123/admin/content/upload"
                      name="image"
-                     list-type="picture"
                      drag :multiple="false"
                      :on-success = "uploadOk"
-                     :file-list="fileListImage"
                      ref="indexImage">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片1">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadDetailImage1"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadDetailImage1"
                      name="detailImage1" drag :multiple="false"
                      :on-success = "uploadDetail1Ok"
-                     :file-list="fileListImage1"
                      list-type="picture" ref="detailImage1">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片2">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadDetailImage2"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadDetailImage2"
                      list-type="picture"
-                     :file-list="fileListImage2"
                      name="detailImage2"
                      drag :multiple="false"
                      :on-success = "uploadDetail2Ok"
@@ -114,9 +110,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片3">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadDetailImage3"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadDetailImage3"  list-type="picture"
                      name="detailImage3"
-                     :file-list="fileListImage3"
                      ref="detailImage3"
                      drag :multiple="false" :on-success = "uploadDetail3Ok">
             <i class="el-icon-upload"></i>
@@ -124,9 +119,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片4">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadDetailImage4"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadDetailImage4"  list-type="picture"
                      name="detailImage4"
-                     :file-list="fileListImage4"
                      ref="detailImage4"
                      drag :multiple="false"
                      :on-success = "uploadDetail4Ok">
@@ -135,9 +129,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片5">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadDetailImage5"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadDetailImage5"  list-type="picture"
                      name="detailImage5"
-                     :file-list="fileListImage5"
                      drag :multiple="false"
                      :on-success = "uploadDetail5Ok"
                      ref="detailImage5">
@@ -146,9 +139,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片1">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadFuncImage1"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadFuncImage1"  list-type="picture"
                      name="funcImage1"
-                     :file-list="fileListImage6"
                      ref="funcImage1"
                      drag :multiple="false"
                      :on-success = "uploadFunc1Ok">
@@ -157,9 +149,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片2">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadFuncImage2"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadFuncImage2"  list-type="picture"
                      name="funcImage2"
-                     :file-list="fileListImage7"
                      ref="funcImage2"
                      drag :multiple="false" :on-success = "uploadFunc2Ok">
             <i class="el-icon-upload"></i>
@@ -167,9 +158,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片3">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadFuncImage3"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadFuncImage3"  list-type="picture"
                      name="funcImage3"
-                     :file-list="fileListImage8"
                      ref="funcImage3"
                      drag :multiple="false" :on-success = "uploadFunc3Ok">
             <i class="el-icon-upload"></i>
@@ -177,9 +167,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片4">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadFuncImage4"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadFuncImage4"  list-type="picture"
                      name="funcImage4"
-                     :file-list="fileListImage9"
                      ref="funcImage4"
                      drag :multiple="false"
                      :on-success = "uploadFunc4Ok">
@@ -188,9 +177,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片5">
-          <el-upload action="http://47.75.167.230:8123/admin/content/uploadFuncImage5"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8123/admin/content/uploadFuncImage5"  list-type="picture"
                      name="funcImage5"
-                     :file-list="fileListImage10"
                      ref="funcImage5"
                      drag :multiple="false" :on-success = "uploadFunc5Ok">
             <i class="el-icon-upload"></i>
@@ -231,17 +219,6 @@
         list: null,
         total: null,
         listLoading: true,
-        fileListImage: [],
-        fileListImage1: [],
-        fileListImage2: [],
-        fileListImage3: [],
-        fileListImage4: [],
-        fileListImage5: [],
-        fileListImage6: [],
-        fileListImage7: [],
-        fileListImage8: [],
-        fileListImage9: [],
-        fileListImage10: [],
         listQuery: {
           page: 1,
           limit: 50,
@@ -399,17 +376,6 @@
         queryMenuListForContent().then(response => {
           this.parentMenuList = response.data.data
         })
-        this._addImageToList(row.image, this.fileListImage)
-        this._addImageToList(row.detailImage1, this.fileListImage1)
-        this._addImageToList(row.detailImage2, this.fileListImage2)
-        this._addImageToList(row.detailImage3, this.fileListImage3)
-        this._addImageToList(row.detailImage4, this.fileListImage4)
-        this._addImageToList(row.detailImage5, this.fileListImage5)
-        this._addImageToList(row.funcImage1, this.fileListImage6)
-        this._addImageToList(row.funcImage2, this.fileListImage7)
-        this._addImageToList(row.funcImage3, this.fileListImage8)
-        this._addImageToList(row.funcImage4, this.fileListImage9)
-        this._addImageToList(row.funcImage5, this.fileListImage10)
         this.temp = {
           id: row.id,
           name: row.name,
@@ -431,13 +397,6 @@
             duration: 2000
           })
         })
-      },
-      _addImageToList(image, list) {
-        if (list.length === 0) {
-          if (image !== '') {
-            list.append(image)
-          }
-        }
       },
       onClose() {
         console.log('关闭对话框')
