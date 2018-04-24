@@ -29,12 +29,12 @@
       </el-table-column>
       <el-table-column min-width="100px" label="生成时间">
         <template scope="scope">
-          <span>{{scope.row.createTime}}</span>
+          <span>{{scope.row.logDate}}</span>
         </template>
       </el-table-column>
       <el-table-column align="left" label="操作">
         <template scope="scope">
-          <el-button size="small" type="success" @click="handleUpdate(scope.row.id)">编辑
+          <el-button size="small" type="success" @click="handleUpdate(scope.row)">编辑
           </el-button>
         </template>
       </el-table-column>
@@ -43,7 +43,7 @@
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
         <el-form-item label="设备id">
-          <span>{{temp.devId}}</span>
+          <el-input v-model="temp.devId" > </el-input>
         </el-form-item>
 
         <el-form-item label="序列码">
@@ -157,6 +157,13 @@
       updateData() {
         const tempData = Object.assign({}, this.temp)
         updateData(tempData).then(() => {
+          this.$notify({
+            title: '成功',
+            message: '修改成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.dialogFormVisible = false
           this.handleFilter()
         })
       }

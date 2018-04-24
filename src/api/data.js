@@ -1,16 +1,16 @@
 import http from '@/utils/fetch'
 
 export function queryList(requestVo) {
-  const url = '/api/admin/selectList'
+  const url = '/dev/queryList'
   return http.post(url, JSON.stringify(requestVo))
 }
 export function queryCount(requestVo) {
-  const url = '/api/admin/selectCount'
+  const url = '/dev/queryCount'
   return http.post(url, JSON.stringify(requestVo))
 }
 
 export function updateData(requestVo) {
-  const url = '/api/admin/updateData'
+  const url = '/dev/updateData'
   return http.post(url, JSON.stringify(requestVo))
 }
 
