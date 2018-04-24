@@ -1,13 +1,11 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" v-model="listQuery.menuName">
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" v-model="listQuery.devId">
       </el-input>
 
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
-                 icon="el-icon-edit">创建
-      </el-button>
+
     </div>
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="加载中" border fit highlight-current-row
@@ -19,24 +17,24 @@
         </template>
       </el-table-column>
 
-      <el-table-column min-width="200px" label="菜单名称">
+      <el-table-column min-width="200px" label="设备ID">
         <template scope="scope">
-          <span>{{scope.row.menuName}}</span>
+          <span>{{scope.row.devId}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="200px" label="上级菜单名">
+      <el-table-column min-width="200px" label="序列码">
         <template scope="scope">
-          <span>{{scope.row.menuParentName}}</span>
+          <span>{{scope.row.serialNo}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="100px" label="排序号">
+      <el-table-column min-width="100px" label="生成时间">
         <template scope="scope">
-          <span>{{scope.row.sort}}</span>
+          <span>{{scope.row.createTime}}</span>
         </template>
       </el-table-column>
       <el-table-column align="left" label="操作">
         <template scope="scope">
-          <el-button size="small" type="success" @click="handleDelete(scope.row.id)">删除
+          <el-button size="small" type="success" @click="handleUpdate(scope.row.id)">编辑
           </el-button>
         </template>
       </el-table-column>
@@ -44,20 +42,14 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
-        <el-form-item label="菜单名称">
-          <el-input v-model="temp.menuName"></el-input>
+        <el-form-item label="设备id">
+          <span>{{temp.devId}}</span>
         </el-form-item>
 
-        <el-form-item label="排序号">
-          <el-input v-model="temp.sort"></el-input>
+        <el-form-item label="序列码">
+          <el-input v-model="temp.serialNo"></el-input>
         </el-form-item>
 
-        <el-form-item label="上级菜单">
-          <el-select   class="filter-item" filterable  v-model="temp.parentId" placeholder="请选择">
-            <el-option v-for="item in  parentMenuList" :key="item.id" :label="item.menuName" :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -77,7 +69,7 @@
 </template>
 
 <script>
-  import { queryMenuList, queryMenuCount, insertMenu, queryParentMenu, updateStatus } from '@/api/menu'
+  import { queryList, queryCount, updateData } from '@/api/data'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -94,13 +86,12 @@
         listQuery: {
           page: 1,
           limit: 50,
-          menuName: undefined
+          devId: undefined
         },
-        parentMenuList: [],
         temp: {
           id: undefined,
-          menuName: '',
-          parentId: -1
+          devId: '',
+          serialNo: ''
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -120,10 +111,10 @@
     methods: {
       getList() {
         this.listLoading = true
-        queryMenuCount(this.listQuery).then(response => {
+        queryCount(this.listQuery).then(response => {
           this.total = response.data.data
         })
-        queryMenuList(this.listQuery).then(response => {
+        queryList(this.listQuery).then(response => {
           this.list = response.data.data
           this.listLoading = false
         })
@@ -150,45 +141,24 @@
       resetTemp() {
         this.temp = {
           id: undefined,
-          menuName: '',
-          sort: 0,
-          parentId: ''
+          devId: '',
+          serialNo: ''
         }
       },
-      handleCreate() {
-        this.resetTemp()
-        this.dialogStatus = 'create'
-        this.dialogFormVisible = true
-        queryParentMenu().then(response => {
-          this.parentMenuList = response.data.data
-        })
-      },
-      createData() {
-        insertMenu(this.temp).then(() => {
-          this.handleFilter()
-          this.dialogFormVisible = false
-          this.$notify({
-            title: '成功',
-            message: '创建成功',
-            type: 'success',
-            duration: 2000
-          })
-        })
-      },
-      handleDelete(id) {
-        updateStatus(id).then(() => {
-          this.handleFilter()
-          this.$notify({
-            title: '成功',
-            message: '删除成功',
-            type: 'success',
-            duration: 2000
-          })
-        })
-      },
       handleUpdate(row) {
+        this.temp = {
+          id: row.id,
+          devId: row.devId,
+          serialNo: row.serialNo
+        }
+        this.dialogStatus = 'update'
+        this.dialogFormVisible = true
       },
       updateData() {
+        const tempData = Object.assign({}, this.temp)
+        updateData(tempData).then(() => {
+          this.handleFilter()
+        })
       }
     }
   }

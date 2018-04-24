@@ -46,21 +46,12 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
-    path: '/extend/menu',
+    path: '/extend/list',
     component: Layout,
     icon: 'table',
     meta: { role: ['admin'] },
     noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/menu/index'), name: '菜单管理', meta: { role: ['admin'] }}]
-  },
-  {
-    path: '/extend/content',
-    component: Layout,
-    icon: 'table',
-    redirect: '/extend/content',
-    meta: { role: ['admin'] },
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/content/index'), name: '网站内容管理' }]
+    children: [{ path: 'index', component: _import('extend/list/index'), name: '签名管理', meta: { role: ['admin'] }}]
   },
   { path: '*', redirect: '/404', hidden: true }
 ]
