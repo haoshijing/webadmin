@@ -27,11 +27,6 @@
           <span>{{scope.row.serialNo}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="100px" label="生成时间">
-        <template scope="scope">
-          <span>{{scope.row.logDate}}</span>
-        </template>
-      </el-table-column>
       <el-table-column align="left" label="操作">
         <template scope="scope">
           <el-button size="small" type="success" @click="handleUpdate(scope.row)">编辑
@@ -43,7 +38,7 @@
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
         <el-form-item label="设备id">
-          <el-input v-model="temp.devId" > </el-input>
+          {{temp.devId}}
         </el-form-item>
 
         <el-form-item label="序列码">
