@@ -1,6 +1,6 @@
 import http from '@/utils/fetch'
 
-export function getAll(requestVo) {
-  const url = '/system/getall'
+export function getAll() {
+  const url = '/system/getAll'
   return http.get(url)
 }

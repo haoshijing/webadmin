@@ -1,8 +1,21 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" v-model="listQuery.devId">
-      </el-input>
+      <el-select clearable class="filter-item" style="width: 130px" v-model="listQuery.systemId" placeholder="系统名称">
+        <el-option v-for="item in systemList" :key="item.id" :label="item.name" :value="item.id">
+        </el-option>
+      </el-select>
+      <el-date-picker
+        v-model="payTime"
+        type="daterange"
+        align="right"
+        placeholder="下单时间"
+        class = "filter-item"
+        unlink-panels
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期">
+      </el-date-picker>
 
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
 
@@ -11,26 +24,20 @@
     <el-table :data="list" v-loading="listLoading" element-loading-text="加载中" border fit highlight-current-row
               style="width: 100%">
 
-      <el-table-column min-width="100px" label="Id">
+      <el-table-column min-width="200px" label="系统名称">
         <template scope="scope">
-          <span>{{scope.row.id}}</span>
+          <span>{{scope.row.systemName}}</span>
         </template>
       </el-table-column>
 
       <el-table-column min-width="200px" label="支付金额">
         <template scope="scope">
-          <span></span>
+          <span>{{scope.row.money}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="200px" label="序列码">
+      <el-table-column min-width="200px" label="支付时间">
         <template scope="scope">
-          <span>{{scope.row.serialNo}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column align="left" label="操作">
-        <template scope="scope">
-          <el-button size="small" type="success" @click="handleUpdate(scope.row)">编辑
-          </el-button>
+          <span>{{scope.row.payTime}}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -48,6 +55,7 @@
 
 <script>
   import { queryList, queryCount } from '@/api/pay'
+  import { getAll } from '@/api/system'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -64,18 +72,33 @@
         listQuery: {
           page: 1,
           limit: 50,
-          devId: undefined
-        }
+          systemId: undefined,
+          start: undefined,
+          end: undefined
+        },
+        systemList: [],
+        payTime: ['', '']
       }
     },
     filters: {
     },
     created() {
       this.getList()
+      getAll().then(response => {
+        this.systemList = response.data.data
+      })
     },
     methods: {
       getList() {
         this.listLoading = true
+        const startTime = this.payTime[0]
+        const endTime = this.payTime[1]
+        if (startTime) {
+          this.listQuery.start = startTime.getTime()
+        }
+        if (endTime) {
+          this.listQuery.end = endTime.getTime() + 24 * 3600 * 1000
+        }
         queryCount(this.listQuery).then(response => {
           this.total = response.data.data
         })
