@@ -46,12 +46,18 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
-    path: '/extend/list',
+    path: '/record',
     component: Layout,
-    icon: 'table',
-    meta: { role: ['admin'] },
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('extend/list/index'), name: '签名管理', meta: { role: ['admin'] }}]
+    name: '报表管理',
+    meta: {
+      title: '报表管理',
+      icon: 'component'
+    },
+    children: [
+      { path: 'monthlist', component: _import('extend/month/index'), name: '月报表', meta: { title: '月报表' }},
+      { path: 'weeklist', component: _import('extend/week/index'), name: '周报表', meta: { title: '周报表' }},
+      { path: 'paylist', component: _import('extend/pay/index'), name: '流水明细', meta: { title: '流水明细' }}
+    ]
   },
   { path: '*', redirect: '/404', hidden: true }
 ]
