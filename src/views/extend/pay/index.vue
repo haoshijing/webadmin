@@ -10,7 +10,7 @@
         type="daterange"
         align="right"
         placeholder="下单时间"
-        class = "filter-item"
+        class="filter-item"
         unlink-panels
         range-separator="至"
         start-placeholder="开始日期"
@@ -80,13 +80,13 @@
         payTime: ['', '']
       }
     },
-    filters: {
-    },
+    filters: {},
     created() {
-      this.getList()
       getAll().then(response => {
-        this.systemList = response.data.data
+        debugger
+        console.log('11')
       })
+      this.getList()
     },
     methods: {
       getList() {
