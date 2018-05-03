@@ -83,8 +83,7 @@
     filters: {},
     created() {
       getAll().then(response => {
-        debugger
-        console.log('11')
+        this.systemList = response.data.data
       })
       this.getList()
     },
