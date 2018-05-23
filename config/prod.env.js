@@ -1,6 +1,6 @@
 module.exports = {
     NODE_ENV: '"production"',
     ENV_CONFIG: '"prod"',
-    BASE_API: '"http://123.56.219.172:8080/encrypt"',
+    BASE_API: '"http://106.15.200.15:8030/balanceadmin"',
     APP_ORIGIN: '"https://wallstreetcn.com"'
 };

@@ -18,7 +18,7 @@
       </el-date-picker>
 
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">查询</el-button>
-
+      汇总:<span>{{totalMoney}}</span>
     </div>
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="加载中" border fit highlight-current-row
@@ -66,6 +66,7 @@
     data() {
       return {
         tableKey: 0,
+        totalMoney: 0,
         list: null,
         total: null,
         listLoading: true,
@@ -102,7 +103,8 @@
           this.total = response.data.data
         })
         queryList(this.listQuery).then(response => {
-          this.list = response.data.data
+          this.list = response.data.data.payVoList
+          this.totalMoney = response.data.data.totalAmount / 100
           this.listLoading = false
         })
       },
