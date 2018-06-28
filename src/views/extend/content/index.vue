@@ -79,7 +79,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="网站图片">
-          <el-upload action="http://47.52.135.205:8124/admin/content/upload"
+          <el-upload action="http://47.52.135.205:8214/content/upload"
                      name="image"
                      list-type="picture"
                      drag :multiple="false"
@@ -91,7 +91,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片1">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadDetailImage1"
+          <el-upload action="http://47.52.135.205:8214/content/uploadDetailImage1"
                      name="detailImage1" drag :multiple="false"
                      :on-success = "uploadDetail1Ok"
                      :file-list="fileListImage1"
@@ -101,7 +101,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片2">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadDetailImage2"
+          <el-upload action="http://47.52.135.205:8214/content/uploadDetailImage2"
                      list-type="picture"
                      :file-list="fileListImage2"
                      name="detailImage2"
@@ -114,7 +114,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片3">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadDetailImage3"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadDetailImage3"  list-type="picture"
                      name="detailImage3"
                      :file-list="fileListImage3"
                      ref="detailImage3"
@@ -124,7 +124,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片4">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadDetailImage4"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadDetailImage4"  list-type="picture"
                      name="detailImage4"
                      :file-list="fileListImage4"
                      ref="detailImage4"
@@ -135,7 +135,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="详情图片5">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadDetailImage5"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadDetailImage5"  list-type="picture"
                      name="detailImage5"
                      :file-list="fileListImage5"
                      drag :multiple="false"
@@ -146,7 +146,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片1">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadFuncImage1"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadFuncImage1"  list-type="picture"
                      name="funcImage1"
                      :file-list="fileListImage6"
                      ref="funcImage1"
@@ -157,7 +157,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片2">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadFuncImage2"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadFuncImage2"  list-type="picture"
                      name="funcImage2"
                      :file-list="fileListImage7"
                      ref="funcImage2"
@@ -167,7 +167,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片3">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadFuncImage3"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadFuncImage3"  list-type="picture"
                      name="funcImage3"
                      :file-list="fileListImage8"
                      ref="funcImage3"
@@ -177,7 +177,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片4">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadFuncImage4"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadFuncImage4"  list-type="picture"
                      name="funcImage4"
                      :file-list="fileListImage9"
                      ref="funcImage4"
@@ -188,7 +188,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="功能图片5">
-          <el-upload action="http://47.52.135.205:8124/admin/content/uploadFuncImage5"  list-type="picture"
+          <el-upload action="http://47.52.135.205:8214/content/uploadFuncImage5"  list-type="picture"
                      name="funcImage5"
                      :file-list="fileListImage10"
                      ref="funcImage5"

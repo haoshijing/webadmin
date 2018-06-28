@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import { queryMenuList, queryMenuCount, insertMenu, updateMenu, queryParentMenu, updateStatus } from '@/api/menu'
+  import { queryMenuList, queryMenuCount, insertMenu, queryParentMenu, updateStatus } from '@/api/menu'
   import waves from '@/directive/waves' // 水波纹指令
 
   export default {
@@ -175,8 +175,8 @@
           })
         })
       },
-      handleDelete(id){
-        updateStatus(id).then( () => {
+      handleDelete(id) {
+        updateStatus(id).then(() => {
           this.handleFilter()
           this.$notify({
             title: '成功',
